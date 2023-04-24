@@ -8,5 +8,6 @@
 int _printf(const char *format, ...);
 int _putchar(char c);
 int _isdigit(int c);
+int put_str(char *str);
 
 #endif

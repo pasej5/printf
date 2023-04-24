@@ -6,45 +6,28 @@
  */
 int _printf(const char *format, ...)
 {
+	int len = 0, i;
 	va_list args;
-	int len = 0;
-	char *str = NULL;
 
 	va_start(args, format);
-	while (*format != '\0')
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
 			format++;
-			if (*format == '\0')
+			if (format[i] == '\0')
 				break;
-			if (*format == 'c')
+			if (format[i] == 'c')
 			{
 				_putchar(va_arg(args, int));
 				len++;
 			}
-			else if (*format == 's')
+			else if (format[i] == 's')
 			{
-				str = va_arg(args, char*);
-				if (str != NULL)
-				{
-					while (*str != '\0')
-					{
-						_putchar(*str);
-						str++;
-						len++;
-					}
-				}
+				int s = put_str(va_arg(args, char*));
+				len += (s - 1);
 			}
-			else if (*format == 'd' || *format == 'i')
-			{
-			int value = va_arg(args, int);
-			char buffer[12];
-			int digits = sprintf(buffer, "%d", value);
-
-			len += write(1, buffer, digits);
-			}
-			else if (*format == '%')
+			else if (format[i] == '%')
 			{
 				_putchar('%');
 				len++;
@@ -52,16 +35,15 @@ int _printf(const char *format, ...)
 			else
 			{
 				_putchar('%');
-				_putchar(*format);
+				_putchar(format[i]);
 				len += 2;
 			}
 		}
 		else
 		{
-			_putchar(*format);
-			len++;
+			_putchar(format[i]);
+			len += 1;
 		}
-		format++;
 	}
 	va_end(args);
 	return (len);

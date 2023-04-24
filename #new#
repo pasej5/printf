@@ -1,0 +1,9 @@
+#include "main.h"
+
+/**
+ *_printf - prints the formatted output of the given parameters
+  *@format: format of the given arguement
+   *Return: returns the number of characters printed
+    */
+
+int _printf(const char *format, ...)
