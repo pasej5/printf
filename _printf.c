@@ -6,7 +6,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int len = 0, i;
+	int len = 0, i, s;
 	va_list args;
 
 	va_start(args, format);
@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 's')
 			{
-				int s = put_str(va_arg(args, char*));
+				s = put_str(va_arg(args, char*));
 				len += (s - 1);
 			}
 			else if (format[i] == '%')
