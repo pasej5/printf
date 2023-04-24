@@ -8,7 +8,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int len = 0;
-	char *str;
+	char *str = NULL;
 
 	va_start(args, format);
 	while (*format != '\0')
@@ -35,6 +35,14 @@ int _printf(const char *format, ...)
 						len++;
 					}
 				}
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+			int value = va_arg(args, int);
+			char buffer[12];
+			int digits = sprintf(buffer, "%d", value);
+
+			len += write(1, buffer, digits);
 			}
 			else if (*format == '%')
 			{
