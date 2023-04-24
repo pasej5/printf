@@ -4,3 +4,4 @@ _printf1
 _printf1.c
 testl
 new.c
+put_str.c
