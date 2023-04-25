@@ -1,68 +1,30 @@
 #include "main.h"
+#include <stdint.h>
+
 /**
- *_printf - prints the formatted output of the given parameters
- *@format: format of the given arguement
- *Return: returns the number of characters printed
+ *_printf - it produces the output according to the given format
+ *@format: format for the the argument
+ *Return: returns an interger
  */
+
 int _printf(const char *format, ...)
 {
+	int len;
+
+	fn f_handlers[] = {
+		{"c", put_char},
+		{"s", put_str},
+		{"%", put_perc},
+		{"d", put_int},
+		{"i", put_int},
+		{NULL, NULL}
+	};
 	va_list args;
-	int len = 0;
-	char *str = NULL;
 
+	if (format == NULL)
+		return (-1);
 	va_start(args, format);
-	while (*format != '\0')
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == '\0')
-				break;
-			if (*format == 'c')
-			{
-				_putchar(va_arg(args, int));
-				len++;
-			}
-			else if (*format == 's')
-			{
-				str = va_arg(args, char*);
-				if (str != NULL)
-				{
-					while (*str != '\0')
-					{
-						_putchar(*str);
-						str++;
-						len++;
-					}
-				}
-			}
-			else if (*format == 'd' || *format == 'i')
-			{
-			int value = va_arg(args, int);
-			char buffer[12];
-			int digits = sprintf(buffer, "%d", value);
-
-			len += write(1, buffer, digits);
-			}
-			else if (*format == '%')
-			{
-				_putchar('%');
-				len++;
-			}
-			else
-			{
-				_putchar('%');
-				_putchar(*format);
-				len += 2;
-			}
-		}
-		else
-		{
-			_putchar(*format);
-			len++;
-		}
-		format++;
-	}
+	len = _printer(format, f_handlers, args);
 	va_end(args);
 	return (len);
 }
