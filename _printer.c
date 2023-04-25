@@ -1,4 +1,11 @@
 #include "main.h"
+/**
+ *_printer - checks the conditions
+ *@format: format of the given arguement
+ *@f_handlers: an array
+ *@args: arguements given
+ *Return: returns an integer
+ */
 
 int _printer(const char *format, fn f_handlers[], va_list args)
 {
