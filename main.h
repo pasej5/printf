@@ -23,11 +23,5 @@ int put_int(va_list);
 void _funcs(const char *format, va_list args);
 int _printf(const char *format, ...);
 int _putchar(char c);
-<<<<<<< HEAD
-int _isdigit(int c);
-int put_str(char *str);
-=======
-void dec_to_bin(int num);
->>>>>>> 6fc54504b88f77d215b86776196228cf66a9525c
-
+int put_bin(va_list args);
 #endif
